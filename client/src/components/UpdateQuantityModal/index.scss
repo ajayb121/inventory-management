@@ -1,0 +1,78 @@
+.buySellHeader {
+  background: #8f9bab;
+  padding: 10px 20px;
+  color: white;
+  font-size: 18px;
+}
+
+.buySellContainer {
+  padding: 20px;
+}
+
+.buySellInputContainer {
+  display: flex;
+  padding: 5px 0;
+
+  input {
+    margin-left: 1px;
+    width: 200px;
+  }
+}
+
+.warning {
+  color: red;
+  font-size: 12px;
+  position: relative;
+
+  >div {
+    position: absolute;
+  }
+}
+
+.buyBtn {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 25px;
+
+  button {
+    background: #61de6b;
+    border-radius: 4px;
+    font-size: 14px;
+    border: 1px solid #5ab761;
+    color: #484646;
+    padding: 5px 20px;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    background: #98d89d;
+    border: 1px solid #b2d0b2;
+    cursor: not-allowed;
+    color: #efecec;
+    cursor: not-allowed;
+  }
+}
+
+.sellBtn {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 25px;
+
+  button {
+    background: #ef437d;
+    border-radius: 4px;
+    font-size: 14px;
+    border: 1px solid #ef437d;
+    color: white;
+    padding: 5px 20px;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    background: #e690ad;
+    border: 1px solid #e690ad;
+    cursor: not-allowed;
+    color: #efecec;
+    cursor: not-allowed;
+  }
+}

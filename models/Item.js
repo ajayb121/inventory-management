@@ -3,16 +3,36 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const ItemSchema = new Schema({
-  company_name: {
+  product_name: {
     type: String,
     required: true
   },
-  item_name: {
+  seller_name: {
     type: String,
     required: true
   },
-  total_count: {
+  material_type: {
+    type: String,
+    required: true
+  },
+  price_version: {
     type: Number,
+    required: true
+  },
+  total_quantity: {
+    type: Number,
+    required: true
+  },
+  price: {
+    type: Number,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  note: {
+    type: String,
     required: true
   },
 });

@@ -4,16 +4,17 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   height: 50px;
-  background: #65baec7d;
+  background: #5e39807d;
   display: flex;
   align-items: center;
 `;
 
 const Logo = styled.div`
   cursor: pointer;
-  padding-left: 50px;
+  padding-left: 20px;
   font-size: 18px;
-  color: #1734d4;
+  color: white;
+  font-family: sans-serif;
   font-weight: bold;
   @media (max-width: 768px) {
     padding-left: 20px;
@@ -21,16 +22,16 @@ const Logo = styled.div`
 `;
 
 const PrimaryLayout = ({ children }) => {
-  useEffect(() => {
-    console.log('Use Effect Working');
-    axios.get('/api/items')
-      .then(({ data }) => {
-        debugger;
-      })
-      .catch((error) => {
-        debugger;
-      });
-  }, []);
+  // useEffect(() => {
+  //   console.log('Use Effect Working');
+  //   axios.get('/api/items')
+  //     .then(({ data }) => {
+  //       debugger;
+  //     })
+  //     .catch((error) => {
+  //       debugger;
+  //     });
+  // }, []);
   return (
     <div>
       <Layout>

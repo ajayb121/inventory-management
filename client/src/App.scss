@@ -1,33 +1,116 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.loader {
+  margin: 20px;
+  height: 300px;
+  width: 90%;
+  border: 1px solid;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.tableContainer {
+  padding: 20px;
+}
+
+.tableStyle {
+  display: flex;
+  width: 90%;
+
+  >div {
+    flex: 1;
+    padding: 5px;
+  }
+
+  >div:nth-child(7) {
+    flex-basis: 30px;
+  }
+
+  >div:nth-child(8) {
+    flex-basis: 80px;
+  }
+
+  >div:last-child {
+    flex-basis: 30px;
+  }
+}
+
+.btnCotainer {
+  >button {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  .buy {
+    background: #21ef31;
+    border-radius: 4px;
+    border: 1px solid #049204;
+    color: #484646;
+  }
+
+  .sell {
+    background: #f5255e;
+    border-radius: 4px;
+    border: 1px solid #b90952;
+    color: white;
+  }
+
+  .edit {
+    background: #97a7e0;
+    border-radius: 4px;
+    border: 1px solid #707dad;
+    color: white;
+  }
+
+  .delete {
+    background: #150f10;
+    border-radius: 4px;
+    border: 1px solid #151213;
+    color: white;
+  }
+}
+
+.header, .row {
+  border: 1px solid gray;
+  padding: 5px 0;
+}
+
+.header {
+  font-weight: 600;
+  background: #c7aeae;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.row {
+  // font-weight: 300;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.addBtnContainer {
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+
+  >button:first-child {
+    cursor: pointer;
+    padding: 5px 10px;
+    background: #445cb3;
+    color: white;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #324db1;
   }
-  to {
-    transform: rotate(360deg);
+
+  >button:last-child {
+    cursor: pointer;
+    padding: 5px 10px;
+    background: #445cb3;
+    border-radius: 4px;
+    border: 1px solid #324db1;
+  }
+
+  a {
+    cursor: inherit;
+    color: white;
+    text-decoration: none;
   }
 }
