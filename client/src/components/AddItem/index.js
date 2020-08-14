@@ -7,6 +7,8 @@ import './index.scss';
 const AddItem = ({
   closeModal,
   updateData,
+  showErrorToast,
+  showSuccessToast,
 }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [inputValue, setInputValue] = useState({
@@ -55,9 +57,12 @@ const AddItem = ({
       .then(({ data }) => {
         updateData(data);
         closeModal();
+        showSuccessToast();
       })
       .catch((error) => {
-        // debugger;
+        const errorMsg = error?.response?.data?.error || "Something went wrong !";
+        closeModal();
+        showErrorToast(errorMsg);
       });
   }
 

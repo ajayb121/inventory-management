@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './App.scss';
-// import LoginComponent from './components/login-screen';
-import PrimaryLayout from './components/common/primaryLayout';
-// import AdminComponent from './components/admin-actions';
-// import ResultsComponent from './components/results';
 import { CSVLink } from "react-csv";
 import Modal from 'react-modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import PrimaryLayout from './components/common/primaryLayout';
 import UpdateQuantityModal from './components/UpdateQuantityModal';
 import { ORDER_TYPE, MODAL_TYPE } from './utils/enums';
 import AddItem from './components/AddItem';
 import EditItem from './components/EditItem';
 import DeleteModal from './components/DeleteModal';
+
+import './App.scss';
 
 function App() {
   const [csvData, setCsvData] = useState([]);
@@ -28,6 +29,8 @@ function App() {
           type={ORDER_TYPE.BUY}
           closeModal={closeModal}
           updateData={setCsvData}
+          showErrorToast={showErrorToast}
+          showSuccessToast={showSuccessToast}
         />);
       case MODAL_TYPE.SELL:
         return (<UpdateQuantityModal
@@ -35,23 +38,31 @@ function App() {
           type={ORDER_TYPE.SELL}
           closeModal={closeModal}
           updateData={setCsvData}
+          showErrorToast={showErrorToast}
+          showSuccessToast={showSuccessToast}
         />);
       case MODAL_TYPE.ADD:
           return(<AddItem
             closeModal={closeModal}
             updateData={setCsvData}
+            showErrorToast={showErrorToast}
+            showSuccessToast={showSuccessToast}
           />);
       case MODAL_TYPE.EDIT:
           return(<EditItem
             rowItem={rowItem}
             closeModal={closeModal}
             updateData={setCsvData}
+            showErrorToast={showErrorToast}
+            showSuccessToast={showSuccessToast}
           />);
       case MODAL_TYPE.DELETE:
           return(<DeleteModal
             rowItem={rowItem}
             closeModal={closeModal}
             updateData={setCsvData}
+            showErrorToast={showErrorToast}
+            showSuccessToast={showSuccessToast}
           />);
       default:
         return (<div>Hello World</div>);
@@ -63,31 +74,17 @@ function App() {
       .then(({ data }) => {
         setCsvData(data);
       })
-      .catch((error) => {
-        // debugger;
+      .catch(() => {
+        showErrorToast();
       })
       .finally(() => {
         setIsLoading(false);
       });
   }, []);
 
-  const deleteRow = ({ _id }) => {
-    axios.delete(`/api/items/${_id}`)
-      .then(({ data }) => {
-        setCsvData(data);
-        // closeModal();
-        // setCsvData(data);
-      })
-      .catch((error) => {
-        // debugger;
-      });
-  }
-
   const openModal = (item, type) => {
-    // debugger;
     setModalType(type);
     setRowItem(item);
-    // setIsModalVisible(true);
   }
 
   useEffect(() => {
@@ -124,6 +121,18 @@ function App() {
       padding: '0',
       transform: 'translate(-50%, -50%)'
     }
+  };
+
+  const showErrorToast = (msg = "Something went wrong !") => {
+    toast.error(msg, {
+      autoClose: 3000,
+    });
+  };
+
+  const showSuccessToast = (msg = "Success !") => {
+    toast.success(msg, {
+      autoClose: 3000,
+    });
   };
 
   return (
@@ -180,6 +189,13 @@ function App() {
             )}
           </>
         )}
+      <div>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          hideProgressBar
+        />
+      </div>
       <Modal
         isOpen={isModalVisible}
         onAfterClose={onAfterClose}

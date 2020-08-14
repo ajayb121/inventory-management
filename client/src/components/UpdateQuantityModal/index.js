@@ -10,6 +10,8 @@ const UpdateQuantityModal = ({
   rowItem,
   closeModal,
   updateData,
+  showSuccessToast,
+  showErrorToast,
 }) => {
   const [inputValue, setInputValue] = useState(1);
   const [showError, setShowError] = useState(false);
@@ -24,10 +26,11 @@ const UpdateQuantityModal = ({
       .then(({ data }) => {
         updateData(data);
         closeModal();
-        // setCsvData(data);
+        showSuccessToast();
       })
       .catch((error) => {
-        // debugger;
+        closeModal();
+        showErrorToast();
       });
   }
 
@@ -67,9 +70,6 @@ const UpdateQuantityModal = ({
           </div>
           <input type="number" value={inputValue} onChange={onInputChange} />
         </div>
-        {/* <span>Quantity: </span>
-        <input onChange={onInputChange} value={inputValue} /> */}
-        {/* </div> */}
         {showError && (
           <div className="warning">
             <div>Enter value less than {type === ORDER_TYPE.BUY ? 10000 : rowItem.total_quantity}.</div>

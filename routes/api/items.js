@@ -64,7 +64,7 @@ router.post('/', (req, res) => {
           Item.find().then(items => res.json(items.sort(sortFunction)));
         });
       } else {
-        res.status(409).json({ error: "Item exists" });
+        res.status(403).json({ error: "Item exists !" });
       }
     });
 });

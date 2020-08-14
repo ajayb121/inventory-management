@@ -10,6 +10,8 @@ const DeleteModal = ({
   rowItem,
   closeModal,
   updateData,
+  showSuccessToast,
+  showErrorToast,
 }) => {
   const [inputValue, setInputValue] = useState(1);
   const [showError, setShowError] = useState(false);
@@ -21,10 +23,10 @@ const DeleteModal = ({
       .then(({ data }) => {
         updateData(data);
         closeModal();
-        // setCsvData(data);
+        showSuccessToast();
       })
       .catch((error) => {
-        // debugger;
+        showErrorToast();
       });
   }
 

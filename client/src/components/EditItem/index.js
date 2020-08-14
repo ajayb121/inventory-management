@@ -7,6 +7,8 @@ const EditItem = ({
   rowItem,
   closeModal,
   updateData,
+  showSuccessToast,
+  showErrorToast,
 }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [inputValue, setInputValue] = useState({
@@ -55,9 +57,11 @@ const EditItem = ({
       .then(({ data }) => {
         updateData(data);
         closeModal();
+        showSuccessToast();
       })
       .catch((error) => {
-        // debugger;
+        showErrorToast();
+        closeModal();
       });
   }
 
