@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { CSVLink } from "react-csv";
 import Modal from 'react-modal';
@@ -42,28 +43,28 @@ function App() {
           showSuccessToast={showSuccessToast}
         />);
       case MODAL_TYPE.ADD:
-          return(<AddItem
-            closeModal={closeModal}
-            updateData={setCsvData}
-            showErrorToast={showErrorToast}
-            showSuccessToast={showSuccessToast}
-          />);
+        return (<AddItem
+          closeModal={closeModal}
+          updateData={setCsvData}
+          showErrorToast={showErrorToast}
+          showSuccessToast={showSuccessToast}
+        />);
       case MODAL_TYPE.EDIT:
-          return(<EditItem
-            rowItem={rowItem}
-            closeModal={closeModal}
-            updateData={setCsvData}
-            showErrorToast={showErrorToast}
-            showSuccessToast={showSuccessToast}
-          />);
+        return (<EditItem
+          rowItem={rowItem}
+          closeModal={closeModal}
+          updateData={setCsvData}
+          showErrorToast={showErrorToast}
+          showSuccessToast={showSuccessToast}
+        />);
       case MODAL_TYPE.DELETE:
-          return(<DeleteModal
-            rowItem={rowItem}
-            closeModal={closeModal}
-            updateData={setCsvData}
-            showErrorToast={showErrorToast}
-            showSuccessToast={showSuccessToast}
-          />);
+        return (<DeleteModal
+          rowItem={rowItem}
+          closeModal={closeModal}
+          updateData={setCsvData}
+          showErrorToast={showErrorToast}
+          showSuccessToast={showSuccessToast}
+        />);
       default:
         return (<div>Hello World</div>);
     }
@@ -100,7 +101,9 @@ function App() {
   }
 
   const headerElements = [
+    "Sl. No.",
     "Product Name",
+    "Model Name",
     "Seller Name",
     "Material Type",
     "Price Version",
@@ -140,54 +143,58 @@ function App() {
       {isLoading ? (
         <div className="loader">Loading...</div>
       ) : (
-          <>
-            {csvData.length > 0 && (
-              <div className="tableContainer">
-                <div className="addBtnContainer">
-                  <button onClick={() => setModalType(MODAL_TYPE.ADD)}>Add Item</button>
-                  <button><CSVLink data={csvData}>Download CSV</CSVLink></button>
+          <div className="tableContainer">
+            <div className="addBtnContainer">
+              <button onClick={() => setModalType(MODAL_TYPE.ADD)}>Add Item</button>
+              <button><Link to="/logs">Show Logs</Link></button>
+              <button><CSVLink data={csvData}>Download CSV</CSVLink></button>
+            </div>
+            <div className="tableStyle header">
+              {headerElements.map((el) => {
+                return (
+                  <div>{el}</div>
+                );
+              })}
+            </div>
+            {csvData.length > 0 ? (csvData.map((el, index) => {
+              const {
+                product_name,
+                model_name,
+                seller_name,
+                material_type,
+                price_version,
+                total_quantity,
+                price,
+                note,
+              } = el;
+              return (
+                <div className="tableStyle row">
+                  <div>{index+1}</div>
+                  <div>{product_name}</div>
+                  <div>{model_name}</div>
+                  <div>{seller_name}</div>
+                  <div>{material_type}</div>
+                  <div>{price_version}</div>
+                  <div>{total_quantity}</div>
+                  <div>{price}</div>
+                  <div className="btnCotainer">
+                    <button className="buy" onClick={openModal.bind(this, el, MODAL_TYPE.BUY)}>Buy</button>
+                    <button className="sell" onClick={openModal.bind(this, el, MODAL_TYPE.SELL)}>Sell</button>
+                  </div>
+                  <div>{note}</div>
+                  <div className="btnCotainer">
+                    <button className="edit" onClick={openModal.bind(this, el, MODAL_TYPE.EDIT)}>Edit</button>
+                    <button className="delete" onClick={openModal.bind(this, el, MODAL_TYPE.DELETE)}>Delete</button>
+                  </div>
                 </div>
-                <div className="tableStyle header">
-                  {headerElements.map((el) => {
-                    return (
-                      <div>{el}</div>
-                    );
-                  })}
-                </div>
-                {csvData.map((el) => {
-                  const {
-                    product_name,
-                    seller_name,
-                    material_type,
-                    price_version,
-                    total_quantity,
-                    price,
-                    note,
-                  } = el;
-                  return (
-                    <div className="tableStyle row">
-                      <div>{product_name}</div>
-                      <div>{seller_name}</div>
-                      <div>{material_type}</div>
-                      <div>{price_version}</div>
-                      <div>{total_quantity}</div>
-                      <div>{price}</div>
-                      <div className="btnCotainer">
-                        <button className="buy" onClick={openModal.bind(this, el, MODAL_TYPE.BUY)}>Buy</button>
-                        <button className="sell" onClick={openModal.bind(this, el, MODAL_TYPE.SELL)}>Sell</button>
-                      </div>
-                      <div>{note}</div>
-                      <div className="btnCotainer">
-                        <button className="edit" onClick={openModal.bind(this, el, MODAL_TYPE.EDIT)}>Edit</button>
-                        <button className="delete" onClick={openModal.bind(this, el, MODAL_TYPE.DELETE)}>Delete</button>
-                      </div>
-                    </div>
-                  );
-                })
-                }
-              </div>
-            )}
-          </>
+              );
+            })
+          ) : (
+            <div className="tableStyle emptyData" >
+              No data! Pease add Item.
+            </div>
+          )}
+          </div>
         )}
       <div>
         <ToastContainer

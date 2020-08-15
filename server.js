@@ -8,10 +8,7 @@ const app = express();
 app.use(express.json());
 
 const items = require('./routes/api/items');
-const base = require('./routes/api/baseRoute');
-// const teerResults = require('./routes/api/teerResults');
-// const login = require('./routes/api/login');
-// const results = require('./routes/api/results');
+const logs = require('./routes/api/logs');
 
 const db = require('./config/keys').mongoURI;
 
@@ -25,10 +22,7 @@ mongoose
 
 // Use Routes
 app.use('/api/items', items);
-app.use('/api/base', base);
-// app.use('/api/login', login);
-// app.use('/api/results', results);
-// app.use('/api/teerResults', teerResults);
+app.use('/api/logs', logs);
 
 app.use(express.static('build'));
 

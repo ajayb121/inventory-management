@@ -4,17 +4,14 @@ const router = express.Router();
 // Item Model
 const Item = require('../../models/Item');
 
-// @route   GET api/items
-// @desc    Get All Items
-// @access  Public
-router.get('/', (req, res) => {
-  Item.find().then(items => res.json(items.sort(sortFunction)));
-});
-
+// sort Function
 const sortFunction = (a, b) => {
 
   var o1 = a["product_name"].toLowerCase();
   var o2 = b["product_name"].toLowerCase();
+
+  var m1 = a["model_name"].split(' ').join('').split('/').join('').toLowerCase();
+  var m2 = b["model_name"].split(' ').join('').split('/').join('').toLowerCase();
 
   var p1 = a["seller_name"].toLowerCase();
   var p2 = b["seller_name"].toLowerCase();
@@ -27,6 +24,8 @@ const sortFunction = (a, b) => {
 
   if (o1 < o2) return -1;
   if (o1 > o2) return 1;
+  if (m1 < m2) return -1;
+  if (m1 > m2) return 1;
   if (p1 < p2) return -1;
   if (p1 > p2) return 1;
   if (q1 < q2) return -1;
@@ -36,37 +35,46 @@ const sortFunction = (a, b) => {
   return 0;
 }
 
+// @route   GET api/items
+// @desc    Get All Items
+// @access  Public
+router.get('/', (req, res) => {
+  Item.find()
+    .then(items => res.json(items.sort(sortFunction)))
+    .catch((err) => res.status(404).json(err));
+});
+
 // @route   POST api/items
 // @desc    Create An Item
 // @access  Public
 router.post('/', (req, res) => {
   const newItem = new Item({
     product_name: req.body.product_name,
+    model_name: req.body.model_name,
     seller_name: req.body.seller_name,
     material_type: req.body.material_type,
     price_version: req.body.price_version,
     price: req.body.price,
     total_quantity: req.body.total_quantity,
-    // date: req.body.date,
     note: req.body.note,
   });
   Item.find({
     product_name: req.body.product_name,
+    model_name: req.body.model_name,
     seller_name: req.body.seller_name,
     material_type: req.body.material_type,
     price_version: req.body.price_version,
   })
     .then(item => {
-      // console.log("item", item);
       if(item.length === 0) {
         newItem.save().then(() => {
-          // const sortedItem = item.sort({})
           Item.find().then(items => res.json(items.sort(sortFunction)));
         });
       } else {
         res.status(403).json({ error: "Item exists !" });
       }
-    });
+    })
+    .catch((err) => res.status(404).json(err));
 });
 
 // @route   POST api/items/edit
@@ -75,12 +83,12 @@ router.post('/', (req, res) => {
 router.post('/edit/:id', (req, res) => {
   const newItem = {
     product_name: req.body.product_name,
+    model_name: req.body.model_name,
     seller_name: req.body.seller_name,
     material_type: req.body.material_type,
     price_version: req.body.price_version,
-    price: req.body.price,
     total_quantity: req.body.total_quantity,
-    // date: req.body.date,
+    price: req.body.price,
     note: req.body.note,
   };
   Item.findById(req.params.id)
@@ -90,24 +98,19 @@ router.post('/edit/:id', (req, res) => {
         .then(() => {
           Item.find().then(items => res.json(items.sort(sortFunction)));
         })
-    });
+    })
+    .catch((err) => res.status(404).json(err));
 });
 
 // @route   POST api/items/updateCount
 // @desc    Update count of an Item
 // @access  Public
-router.post('/updateCount', (req, res) => {
+router.post('/updateCount/:id', (req, res) => {
   const { quantity } = req.body;
-  Item.find({
-    product_name: req.body.product_name,
-    seller_name: req.body.seller_name,
-    material_type: req.body.material_type,
-    price_version: req.body.price_version,
-  })
+  Item.findById(req.params.id)
     .then(item => {
-      // console.log("item", item);
-      const qty = item[0].total_quantity + quantity;
-      Item.updateOne({ _id: item[0]._id }, { $set: { total_quantity: qty } })
+      const qty = item.total_quantity + quantity;
+      Item.updateOne({ _id: item._id }, { $set: { total_quantity: qty } })
         .then(() => {
           Item.find().then(items => res.json(items.sort(sortFunction)));
         })
@@ -123,7 +126,7 @@ router.delete('/:id', (req, res) => {
     .then(item => item.remove().then(() => {
       Item.find().then(items => res.json(items.sort(sortFunction)));
     }))
-    .catch(() => res.status(404).json({ success: false }))
+    .catch(() => res.status(404).json(err))
 });
 
 module.exports = router;

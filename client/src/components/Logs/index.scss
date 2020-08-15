@@ -1,5 +1,14 @@
-.loader {
-  margin: 20px;
+.layoutHeader {
+  position: absolute;
+  padding: 20px 20px 0;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: underline;
+  color: #b52c2c;
+}
+
+.logsLoader {
+  margin: 60px 20px;
   height: 300px;
   width: calc(100%-40px);
   border: 1px solid;
@@ -7,12 +16,12 @@
   align-items: center;
   justify-content: center;
 }
-
+  
 .tableContainer {
   padding: 20px;
 }
 
-.tableStyle {
+.logTableStyle {
   display: flex;
   width: 100%;
 
@@ -26,28 +35,36 @@
   }
 
   >div:nth-child(2) {
-    flex-basis: 70px;
-  }
-
-  >div:nth-child(3) {
-    flex-basis: 130px;
-  }
-
-  >div:nth-child(5) {
-    flex-basis: 100px;
-  }
-
-  >div:nth-child(9) {
     flex: 0 0 100px;
   }
 
-  >div:nth-child(10) {
-    flex-basis: 80px;
+  >div:nth-child(3) {
+    flex: 0 0 170px;
   }
 
-  >div:last-child {
-    flex: 0 0 125px;
+  >div:nth-child(4) {
+    flex: 0 0 200px;
   }
+
+  >div:nth-child(6) {
+    flex: 0 0 200px;
+  }
+
+  >div:nth-child(7) {
+    flex: 0 0 80px;
+  }
+
+  // >div:nth-child(9) {
+  //   flex: 0 0 100px;
+  // }
+
+  // >div:nth-child(10) {
+  //   flex-basis: 80px;
+  // }
+
+  // >div:last-child {
+  //   flex: 0 0 200px;
+  // }
 }
 
 .emptyData {
@@ -114,7 +131,7 @@
   justify-content: flex-end;
   padding-bottom: 10px;
 
-  >button {
+  >button:first-child {
     cursor: pointer;
     padding: 5px 10px;
     background: #445cb3;
@@ -137,4 +154,12 @@
     color: white;
     text-decoration: none;
   }
+}
+
+.green {
+  color: #049204;
+}
+
+.red {
+  color: #b52c2c;
 }

@@ -9,23 +9,16 @@
   padding: 20px;
 }
 
-.buySellInputContainer {
-  display: flex;
-  padding: 5px 0;
+.warningContainer {
+  height: 20px;
+  .warning {
+    color: red;
+    font-size: 12px;
+    position: relative;
 
-  input {
-    margin-left: 1px;
-    width: 200px;
-  }
-}
-
-.warning {
-  color: red;
-  font-size: 12px;
-  position: relative;
-
-  >div {
-    position: absolute;
+    >div {
+      position: absolute;
+    }
   }
 }
 

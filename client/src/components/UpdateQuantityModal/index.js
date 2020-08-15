@@ -14,21 +14,28 @@ const UpdateQuantityModal = ({
   showErrorToast,
 }) => {
   const [inputValue, setInputValue] = useState(1);
+  const [inputNote, setInputNote] = useState("");
   const [showError, setShowError] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const updateQuantity = () => {
     setIsButtonDisabled(true);
-    axios.post('/api/items/updateCount', {
-      ...rowItem,
+    axios.post(`/api/items/updateCount/${rowItem._id}`, {
       quantity: (type === ORDER_TYPE.BUY) ? inputValue : -inputValue,
     })
       .then(({ data }) => {
         updateData(data);
+        axios.post(`/api/logs`, {
+          ...rowItem,
+          quantity: inputValue,
+          note: inputNote,
+          order_type: type,
+        });
         closeModal();
         showSuccessToast();
       })
       .catch((error) => {
+        debugger;
         closeModal();
         showErrorToast();
       });
@@ -53,28 +60,41 @@ const UpdateQuantityModal = ({
     }
   };
 
+  const handleNoteChange = (ev) => {
+    setInputNote(ev.target.value);
+  }
+
   const {
     product_name,
     seller_name,
+    model_name,
     material_type,
     price_version,
   } = rowItem;
 
   return (
     <div>
-      <div className="buySellHeader">{`${product_name}-${seller_name}-${material_type}-${price_version}`}</div>
+      <div className="buySellHeader">{`${model_name} (v${price_version})`}</div>
       <div className="buySellContainer">
-        <div className="buySellInputContainer">
+        <div className="inputContainer">
           <div className="inputLabel">
             Quantity:
           </div>
           <input type="number" value={inputValue} onChange={onInputChange} />
         </div>
-        {showError && (
-          <div className="warning">
-            <div>Enter value less than {type === ORDER_TYPE.BUY ? 10000 : rowItem.total_quantity}.</div>
-          </div>
-        )}
+        <div className="warningContainer">
+          {showError && (
+            <div className="warning">
+              <div>Enter value less than {type === ORDER_TYPE.BUY ? 10000 : rowItem.total_quantity}.</div>
+            </div>
+          )}
+        </div>
+        <div className="textInputContainer">
+          <div className="inputLabel">
+            Note:
+            </div>
+          <textarea value={inputNote} onChange={handleNoteChange} />
+        </div>
         <div className={type === ORDER_TYPE.BUY ? "buyBtn" : "sellBtn"}>
           <button disabled={isButtonDisabled} onClick={updateQuantity}>{type === ORDER_TYPE.BUY ? "Buy" : "Sell"}</button>
         </div>

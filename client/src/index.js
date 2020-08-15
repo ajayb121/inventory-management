@@ -1,18 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import './index.css'
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import App from './App'
 import Notfound from './components/empty-state';
-// import LoginComponent from './components/login-screen';
+import Logs from './components/Logs';
 
 const routing = (
   <Router>
     <div>
       <Switch>
         <Route exact path="/" component={App} />
-        {/* <Route path="/admin" component={LoginComponent} /> */}
+        <Route path="/logs" component={Logs} />
         <Route component={Notfound} />
       </Switch>
     </div>

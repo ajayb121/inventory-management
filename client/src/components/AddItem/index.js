@@ -13,6 +13,7 @@ const AddItem = ({
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [inputValue, setInputValue] = useState({
     productName: '',
+    modelName: '',
     sellerName: '',
     materialType: '',
     priceVersion: 1,
@@ -47,6 +48,7 @@ const AddItem = ({
     setIsButtonDisabled(true);
     axios.post('/api/items', {
       product_name: inputValue.productName,
+      model_name: inputValue.modelName,
       seller_name: inputValue.sellerName,
       material_type: inputValue.materialType,
       price_version: inputValue.priceVersion,
@@ -79,6 +81,12 @@ const AddItem = ({
           </div>
           <div className="inputContainer">
             <div className="inputLabel">
+              Model Name:
+            </div>
+            <input type="text" value={inputValue.modelName} onChange={(ev) => handleChange(ev, 'modelName')} />
+          </div>
+          <div className="inputContainer">
+            <div className="inputLabel">
               Seller Name:
             </div>
             <input type="text" value={inputValue.sellerName} onChange={(ev) => handleChange(ev, 'sellerName')} />
@@ -107,7 +115,7 @@ const AddItem = ({
             </div>
             <input type="number" value={inputValue.price} onChange={(ev) => handleChange(ev, 'price')} />
           </div>
-          <div className="inputContainer">
+          <div className="textInputContainer">
             <div className="inputLabel">
               Note:
             </div>

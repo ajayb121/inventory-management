@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Create Schema
-const ItemSchema = new Schema({
+const LogsSchema = new Schema({
+  date: {
+    type: Date,
+    default: Date.now
+  },
   product_name: {
     type: String,
     required: true
@@ -23,7 +27,11 @@ const ItemSchema = new Schema({
     type: Number,
     required: true
   },
-  total_quantity: {
+  order_type: {
+    type: String,
+    required: true
+  },
+  quantity: {
     type: Number,
     required: true
   },
@@ -31,14 +39,10 @@ const ItemSchema = new Schema({
     type: Number,
     required: true
   },
-  date: {
-    type: Date,
-    default: Date.now
-  },
   note: {
     type: String,
-    required: true
+    default: 'Empty note'
   },
 });
 
-module.exports = Item = mongoose.model('items', ItemSchema);
+module.exports = Logs = mongoose.model('logs', LogsSchema);

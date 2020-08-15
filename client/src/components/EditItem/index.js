@@ -13,6 +13,7 @@ const EditItem = ({
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [inputValue, setInputValue] = useState({
     productName: rowItem.product_name,
+    modelName: rowItem.model_name,
     sellerName: rowItem.seller_name,
     materialType: rowItem.material_type,
     priceVersion: rowItem.price_version,
@@ -47,6 +48,7 @@ const EditItem = ({
     setIsButtonDisabled(true);
     axios.post(`/api/items/edit/${rowItem._id}`, {
       product_name: inputValue.productName,
+      model_name: inputValue.modelName,
       seller_name: inputValue.sellerName,
       material_type: inputValue.materialType,
       price_version: inputValue.priceVersion,
@@ -78,6 +80,12 @@ const EditItem = ({
           </div>
           <div className="inputContainer">
             <div className="inputLabel">
+              Model Name:
+            </div>
+            <input type="text" value={inputValue.modelName} onChange={(ev) => handleChange(ev, 'modelName')} />
+          </div>
+          <div className="inputContainer">
+            <div className="inputLabel">
               Seller Name:
             </div>
             <input type="text" value={inputValue.sellerName} onChange={(ev) => handleChange(ev, 'sellerName')} />
@@ -106,7 +114,7 @@ const EditItem = ({
             </div>
             <input type="number" value={inputValue.price} onChange={(ev) => handleChange(ev, 'price')} />
           </div>
-          <div className="inputContainer">
+          <div className="textInputContainer">
             <div className="inputLabel">
               Note:
             </div>
