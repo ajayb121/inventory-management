@@ -1,0 +1,170 @@
+.layoutHeader {
+  position: absolute;
+  padding: 20px 20px 0;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: underline;
+  color: #b52c2c;
+}
+
+.logsLoader {
+  margin: 60px 20px;
+  height: 300px;
+  width: calc(100%-40px);
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tableContainer {
+  padding: 20px;
+}
+
+.logTableStyle {
+  display: flex;
+  width: 100%;
+
+  >div {
+    flex: 1;
+    padding: 5px;
+  }
+
+  >div:nth-child(1) {
+    flex: 0 0 55px;
+  }
+
+  >div:nth-child(2) {
+    flex: 0 0 100px;
+  }
+
+  >div:nth-child(3) {
+    flex: 0 0 170px;
+  }
+
+  >div:nth-child(4) {
+    flex: 0 0 200px;
+  }
+
+  >div:nth-child(6) {
+    flex: 0 0 200px;
+  }
+
+  >div:nth-child(7) {
+    flex: 0 0 80px;
+  }
+
+  >div:last-child {
+    flex-basis: 100px;
+  }
+}
+
+.emptyData {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  border: 1px solid;
+}
+
+.btnCotainer {
+  >button {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  .buy {
+    background: #21ef31;
+    border-radius: 4px;
+    border: 1px solid #049204;
+    color: #484646;
+  }
+
+  .sell {
+    background: #f5255e;
+    border-radius: 4px;
+    border: 1px solid #b90952;
+    color: white;
+  }
+
+  .edit {
+    background: #97a7e0;
+    border-radius: 4px;
+    border: 1px solid #707dad;
+    color: white;
+  }
+
+  .delete {
+    background: #150f10;
+    border-radius: 4px;
+    border: 1px solid #151213;
+    color: white;
+  }
+}
+
+.header, .row {
+  border: 1px solid gray;
+  padding: 5px 0;
+}
+
+.header {
+  font-weight: 600;
+  background: #c7aeae;
+  color: white;
+}
+
+.row {
+  // font-weight: 300;
+}
+
+.addBtnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+
+  >button:first-child {
+    cursor: pointer;
+    padding: 5px 10px;
+    background: #445cb3;
+    color: white;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #324db1;
+  }
+
+  >button:last-child {
+    cursor: pointer;
+    padding: 5px 10px;
+    background: #445cb3;
+    border-radius: 4px;
+    border: 1px solid #324db1;
+  }
+
+  a {
+    cursor: inherit;
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.green {
+  color: #049204;
+}
+
+.red {
+  color: #b52c2c;
+}
+
+.datePickerContainer {
+  margin-right: 10px;
+
+  .react-datepicker__close-icon::after {
+    height: 12px;
+    width: 12px;
+  }
+}
+
+.datePicker {
+  padding: 5px;
+}

@@ -1,0 +1,140 @@
+.loader {
+  margin: 20px;
+  height: 300px;
+  width: calc(100%-40px);
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tableContainer {
+  padding: 20px;
+}
+
+.tableStyle {
+  display: flex;
+  width: 100%;
+
+  >div {
+    flex: 1;
+    padding: 5px;
+  }
+
+  >div:nth-child(1) {
+    flex: 0 0 55px;
+  }
+
+  >div:nth-child(2) {
+    flex-basis: 70px;
+  }
+
+  >div:nth-child(3) {
+    flex-basis: 130px;
+  }
+
+  >div:nth-child(5) {
+    flex-basis: 100px;
+  }
+
+  >div:nth-child(9) {
+    flex: 0 0 100px;
+  }
+
+  >div:nth-child(10) {
+    flex-basis: 80px;
+  }
+
+  >div:last-child {
+    flex: 0 0 125px;
+  }
+}
+
+.emptyData {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  border: 1px solid;
+}
+
+.btnCotainer {
+  >button {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  .buy {
+    background: #21ef31;
+    border-radius: 4px;
+    border: 1px solid #049204;
+    color: #484646;
+  }
+
+  .sell {
+    background: #f5255e;
+    border-radius: 4px;
+    border: 1px solid #b90952;
+    color: white;
+  }
+
+  .edit {
+    background: #97a7e0;
+    border-radius: 4px;
+    border: 1px solid #707dad;
+    color: white;
+  }
+
+  .delete {
+    background: #150f10;
+    border-radius: 4px;
+    border: 1px solid #151213;
+    color: white;
+  }
+}
+
+.header, .row {
+  border: 1px solid gray;
+  padding: 5px 0;
+}
+
+.header {
+  font-weight: 600;
+  background: #c7aeae;
+  color: white;
+}
+
+.row {
+  // font-weight: 300;
+}
+
+.addBtnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+
+  >button {
+    cursor: pointer;
+    padding: 5px 10px;
+    background: #445cb3;
+    color: white;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #324db1;
+  }
+
+  >button:last-child {
+    cursor: pointer;
+    padding: 5px 10px;
+    background: #445cb3;
+    border-radius: 4px;
+    border: 1px solid #324db1;
+  }
+
+  a {
+    cursor: inherit;
+    color: white;
+    text-decoration: none;
+  }
+}

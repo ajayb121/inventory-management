@@ -1,0 +1,73 @@
+.buySellHeader {
+  background: #8f9bab;
+  padding: 10px 20px;
+  color: white;
+  font-size: 18px;
+}
+
+.buySellContainer {
+  padding: 20px;
+}
+
+.deleteContainer {
+  padding: 20px;
+  width: 400px;
+}
+
+.warning {
+  color: red;
+  font-size: 12px;
+  position: relative;
+
+  >div {
+    position: absolute;
+  }
+}
+
+.deleteBtn {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 25px;
+
+  button {
+    background: #939894;
+    border-radius: 4px;
+    font-size: 14px;
+    border: 1px solid #939894;
+    color: white;
+    padding: 5px 20px;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    background: #c1c7c2;
+    border: 1px solid #c1c7c2;
+    cursor: not-allowed;
+    color: #efecec;
+    cursor: not-allowed;
+  }
+}
+
+.sellBtn {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 25px;
+
+  button {
+    background: #ef437d;
+    border-radius: 4px;
+    font-size: 14px;
+    border: 1px solid #ef437d;
+    color: white;
+    padding: 5px 20px;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    background: #e690ad;
+    border: 1px solid #e690ad;
+    cursor: not-allowed;
+    color: #efecec;
+    cursor: not-allowed;
+  }
+}
