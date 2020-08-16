@@ -155,3 +155,16 @@
 .red {
   color: #b52c2c;
 }
+
+.datePickerContainer {
+  margin-right: 10px;
+
+  .react-datepicker__close-icon::after {
+    height: 12px;
+    width: 12px;
+  }
+}
+
+.datePicker {
+  padding: 5px;
+}

@@ -22,16 +22,6 @@ const Logo = styled.div`
 `;
 
 const PrimaryLayout = ({ children }) => {
-  // useEffect(() => {
-  //   console.log('Use Effect Working');
-  //   axios.get('/api/items')
-  //     .then(({ data }) => {
-  //       debugger;
-  //     })
-  //     .catch((error) => {
-  //       debugger;
-  //     });
-  // }, []);
   return (
     <div>
       <Layout>

@@ -35,7 +35,6 @@ const UpdateQuantityModal = ({
         showSuccessToast();
       })
       .catch((error) => {
-        debugger;
         closeModal();
         showErrorToast();
       });

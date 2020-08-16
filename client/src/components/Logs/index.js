@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import moment from "moment";
 import axios from 'axios';
+import cloneDeep from "lodash/cloneDeep";
 import { CSVLink } from "react-csv";
 import { ToastContainer, toast } from 'react-toastify';
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 import 'react-toastify/dist/ReactToastify.css';
 
 import PrimaryLayout from '../common/primaryLayout';
@@ -13,13 +17,16 @@ import { ORDER_TYPE } from '../../utils/enums';
 
 function Logs() {
   const [csvData, setCsvData] = useState([]);
+  const [fullData, setFullData] = useState([]);
+  const [startDate, setStartDate] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios.get('/api/logs')
       .then(({ data }) => {
+        setFullData(data);
         const updatedData = data.map((el) => {
-          const row = el;
+          const row = { ...el };
           row.date = moment(el.date).format("DD-MM-YYYY h:mm A");
           return row;
         });
@@ -55,6 +62,25 @@ function Logs() {
     });
   };
 
+  const handleDateChange = date => {
+    setStartDate(date);
+  };
+
+  useEffect(() => {
+    if (startDate) {
+      const updatedData = fullData.filter((el) => {
+        return moment(startDate).format("DDMMYYYY") === moment(el.date).format("DDMMYYYY");
+      }).map((el) => {
+        const row = { ...el };
+        row.date = moment(el.date).format("DD-MM-YYYY h:mm A");
+        return row;
+      });
+      setCsvData(updatedData);
+    } else if (fullData.length > 0) {
+      setCsvData(fullData);
+    }
+  }, [startDate]);
+
   return (
     <PrimaryLayout>
       <div className="layoutHeader">Order Logs</div>
@@ -63,6 +89,16 @@ function Logs() {
       ) : (
           <div className="tableContainer">
             <div className="addBtnContainer">
+              <div className="datePickerContainer">
+                <DatePicker
+                  selected={startDate}
+                  dateFormat="dd/MM/yyyy"
+                  onChange={handleDateChange}
+                  className="datePicker"
+                  isClearable
+                  placeholderText="Click to select Date"
+                />
+              </div>
               <button><Link to="/">Go to Home Page</Link></button>
               <button><CSVLink data={csvData}>Download CSV</CSVLink></button>
             </div>
@@ -88,7 +124,7 @@ function Logs() {
               } = el;
               return (
                 <div className="logTableStyle row">
-                  <div>{index+1}</div>
+                  <div>{index + 1}</div>
                   <div>{date}</div>
                   <div>{product_name}</div>
                   <div>{model_name}</div>
@@ -102,11 +138,11 @@ function Logs() {
                 </div>
               );
             })
-          ) : (
-            <div className="tableStyle emptyData" >
-              No data! Pease add Item.
+            ) : (
+                <div className="tableStyle emptyData" >
+                  No data! Pease add Item.
             </div>
-          )}
+              )}
           </div>
         )}
       <div>
