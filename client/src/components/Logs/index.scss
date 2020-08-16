@@ -54,17 +54,9 @@
     flex: 0 0 80px;
   }
 
-  // >div:nth-child(9) {
-  //   flex: 0 0 100px;
-  // }
-
-  // >div:nth-child(10) {
-  //   flex-basis: 80px;
-  // }
-
-  // >div:last-child {
-  //   flex: 0 0 200px;
-  // }
+  >div:last-child {
+    flex-basis: 100px;
+  }
 }
 
 .emptyData {
